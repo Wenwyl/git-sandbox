@@ -7,6 +7,9 @@ unsigned long long factorial(int n) {
     if (n < 0) {
         throw std::invalid_argument("Factorial is not defined for negative numbers");
     }
+    if (n > 20) {
+        throw std::overflow_error("Factorial overflow: input too large (max 20)");
+    }
     if (n == 0 || n == 1) {
         return 1;
     }

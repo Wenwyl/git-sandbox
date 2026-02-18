@@ -57,6 +57,15 @@ TEST(MathUtilsTest, FactorialNegativeThrows) {
     EXPECT_THROW(mylib::factorial(-1), std::invalid_argument);
 }
 
+TEST(MathUtilsTest, FactorialOverflowThrows) {
+    EXPECT_THROW(mylib::factorial(21), std::overflow_error);
+}
+
+TEST(MathUtilsTest, FactorialMaxValue) {
+    // 20! is the largest factorial that fits in unsigned long long
+    EXPECT_EQ(mylib::factorial(20), 2432902008176640000ULL);
+}
+
 // Test isPrime function
 TEST(MathUtilsTest, IsPrimeNegative) {
     EXPECT_FALSE(mylib::isPrime(-5));

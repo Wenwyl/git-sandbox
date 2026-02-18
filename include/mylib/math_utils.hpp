@@ -33,9 +33,10 @@ double mean(const std::vector<T>& values) {
 
 /**
  * @brief Calculate the factorial of a non-negative integer
- * @param n Non-negative integer
+ * @param n Non-negative integer (maximum 20 to prevent overflow)
  * @return Factorial of n
  * @throws std::invalid_argument if n is negative
+ * @throws std::overflow_error if n > 20
  */
 unsigned long long factorial(int n);
 

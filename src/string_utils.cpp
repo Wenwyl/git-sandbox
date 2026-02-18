@@ -19,14 +19,14 @@ std::string toLower(const std::string& str) {
 
 std::string trim(const std::string& str) {
     auto start = str.begin();
-    while (start != str.end() && std::isspace(*start)) {
+    while (start != str.end() && std::isspace(static_cast<unsigned char>(*start))) {
         ++start;
     }
     
     auto end = str.end();
     do {
         --end;
-    } while (std::distance(start, end) > 0 && std::isspace(*end));
+    } while (std::distance(start, end) > 0 && std::isspace(static_cast<unsigned char>(*end)));
     
     return std::string(start, end + 1);
 }
@@ -53,14 +53,15 @@ bool isPalindrome(const std::string& str) {
     
     while (left < right) {
         // Skip non-alphanumeric characters
-        while (left < right && !std::isalnum(*left)) {
+        while (left < right && !std::isalnum(static_cast<unsigned char>(*left))) {
             ++left;
         }
-        while (left < right && !std::isalnum(*right)) {
+        while (left < right && !std::isalnum(static_cast<unsigned char>(*right))) {
             --right;
         }
         
-        if (std::tolower(*left) != std::tolower(*right)) {
+        if (std::tolower(static_cast<unsigned char>(*left)) != 
+            std::tolower(static_cast<unsigned char>(*right))) {
             return false;
         }
         
