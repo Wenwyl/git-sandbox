@@ -1,0 +1,41 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        build_type: [Debug, Release]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v1.14
+      with:
+        cmake-version: '3.14.x'
+    
+    - name: Configure CMake
+      run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+    
+    - name: Build
+      run: cmake --build build --config ${{ matrix.build_type }}
+    
+    - name: Run Tests
+      run: ctest --test-dir build --build-config ${{ matrix.build_type }} --output-on-failure
+    
+    - name: Run Example (Unix)
+      if: runner.os != 'Windows'
+      run: ./build/example
+    
+    - name: Run Example (Windows)
+      if: runner.os == 'Windows'
+      run: .\build\${{ matrix.build_type }}\example.exe
