@@ -5,7 +5,6 @@ Uses Flask for REST API and JSON for data exchange
 """
 
 from flask import Flask, jsonify, request
-import os
 from threading import Lock
 
 app = Flask(__name__)
