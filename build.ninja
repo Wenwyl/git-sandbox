@@ -1,0 +1,4 @@
+rule cc
+  command = g++ -Wall -Wextra -O2 -o main main.cpp
+
+build main: cc main.cpp 
