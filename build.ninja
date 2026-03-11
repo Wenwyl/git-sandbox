@@ -1,4 +1,10 @@
-rule cc
-  command = g++ -Wall -Wextra -O2 -o main main.cpp
+rule cxx
+  command = g++ -std=c++17 -Wall -Wextra -Iinclude -c $in -o $out
 
-build main: cc main.cpp 
+rule link
+  command = g++ $in -o $out
+
+build build/main.o: cxx src/main.cpp
+build build/app: link build/main.o
+
+default build/app
