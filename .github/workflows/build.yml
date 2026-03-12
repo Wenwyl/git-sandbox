@@ -17,6 +17,16 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y g++ ninja-build
 
+    - name: Code formatting check
+      run: clang-format --dry-run --Werror src/*.cpp include/*.hpp
+
+    - name: Static analysis (clang-tidy)
+      run: clang-tidy src/*.cpp -- -std=c++17
+
+    - name: Static analysis (cppcheck)
+      run: cppcheck --enable=all --error-exitcode=1 src/
+
+
     - name: Make build.sh executable
       run: chmod +x build.sh
 
