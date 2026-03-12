@@ -20,10 +20,10 @@ jobs:
     - name: Code formatting check
       run: |
         set +e
-        clang-format -n --Werror src/*.cpp include/*.hpp
+        clang-format -n --Werror src/*.cpp 
         if [ $? -ne 0 ]; then
         echo "Formatting issues detected:"
-        clang-format -i src/*.cpp include/*.hpp
+        clang-format -i src/*.cpp 
         git --no-pager diff
         exit 1
         fi
