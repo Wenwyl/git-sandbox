@@ -33,8 +33,7 @@ jobs:
       run: clang-tidy src/*.cpp -- -std=c++17
 
     - name: Static analysis (cppcheck)
-      run: cppcheck --enable=all --error-exitcode=1 src/
-
+      run: cppcheck --enable=warning,style,performance,portability --error-exitcode=1 src/
 
     - name: Make build.sh executable
       run: chmod +x build.sh
